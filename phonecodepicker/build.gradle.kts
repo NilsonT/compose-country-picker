@@ -4,10 +4,12 @@ plugins {
     id("maven-publish")
 }
 
+group = "com.nt.phonecodepicker"
+version = "1.0"
+
 android {
     namespace = "com.nt.phonecodepicker"
     compileSdk = 34
-    defaultPublishConfig = "debug"
     defaultConfig {
         minSdk = 24
         targetSdk = 34
@@ -64,7 +66,7 @@ afterEvaluate {
             create<MavenPublication>("release") {
                 from(components["release"])
                 groupId = "com.nt.phonecodepicker"
-                artifactId = "PhoneCodePicker"
+                artifactId = "compose-country-picker"
                 version = "1.0"
             }
         }
