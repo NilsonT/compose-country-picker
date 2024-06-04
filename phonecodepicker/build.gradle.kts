@@ -1,6 +1,7 @@
 plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
+    id("maven-publish")
 }
 
 android {
@@ -55,4 +56,17 @@ dependencies {
     //Material components
     implementation("com.google.android.material:material:1.12.0")
     implementation("androidx.compose.material:material:1.6.7")
+}
+
+afterEvaluate {
+    publishing {
+        publications {
+            create<MavenPublication>("release") {
+                from(components["release"])
+                groupId = "com.nt.phonecodepicker"
+                artifactId = "PhoneCodePicker"
+                version = "1.0"
+            }
+        }
+    }
 }
