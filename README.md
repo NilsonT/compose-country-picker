@@ -1,6 +1,6 @@
 # Jetpack Compose Country Code Picker (KTS)
 
-Jetpack Compose Country Code Picker
+[![](https://jitpack.io/v/nilsont/compose-country-picker.svg)](https://jitpack.io/#nilsont/compose-country-picker)
 
 
 <img src="https://github.com/NilsonT/compose-country-picker/blob/main/001.png" width="230"> | <img src="https://github.com/NilsonT/compose-country-picker/blob/main/002.png" width="230"> | <img src="https://github.com/NilsonT/compose-country-picker/blob/main/003.png" width="230">
