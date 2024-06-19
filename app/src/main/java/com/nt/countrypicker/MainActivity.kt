@@ -43,7 +43,7 @@ import androidx.compose.ui.unit.sp
 import com.nt.countrypicker.ui.theme.CountryPickerJetpackComposeTheme
 import com.nt.phonecodepicker.component.CountryPickerBottomSheet
 import com.nt.phonecodepicker.utils.defaultCountry
-import com.nt.phonecodepicker.utils.getCountryNameRes
+import com.nt.phonecodepicker.utils.getCountryNameString
 import com.nt.phonecodepicker.utils.getFlagIcon
 
 class MainActivity : ComponentActivity() {
@@ -136,7 +136,7 @@ fun Picker() {
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(horizontal = 16.dp, vertical = 4.dp),
-                    text = stringResource(id = selectedCountry.getCountryNameRes()),
+                    text = selectedCountry.getCountryNameString(),
                     textAlign = TextAlign.Start,
                     color = Color.Black,
                     maxLines = 1,
