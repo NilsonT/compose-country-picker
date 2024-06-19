@@ -7,15 +7,27 @@ import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 import com.google.gson.reflect.TypeToken
 import java.io.IOException
+import java.util.Locale
 
 fun defaultCountry(): Country {
-    return Country(name = "Venezuela, Bolivarian Republic of Venezuela", dialCode = "+58", code = "VE")
+    return Country(
+        nameEs = "Venezuela",
+        nameEn = "Venezuela", dialCode = "+58", code = "VE"
+    )
 }
 
 fun countryList(context: Context): MutableList<Country> {
     val jsonFileString = getJsonDataFromAsset(context, "Countries.json")
     val type = object : TypeToken<List<Country>>() {}.type
-    return Gson().fromJson(jsonFileString, type)
+    val list: MutableList<Country> = Gson().fromJson(jsonFileString, type)
+    list.sortBy {
+        when (Locale.getDefault().language.lowercase()) {
+            "en" -> it.nameEn
+            "es" -> it.nameEs
+            else -> it.nameEn
+        }
+    }
+    return list
 }
 
 fun getJsonDataFromAsset(context: Context, fileName: String): String? {
@@ -32,19 +44,30 @@ fun getJsonDataFromAsset(context: Context, fileName: String): String? {
 fun List<Country>.searchCountry(countryName: String): List<Country> {
     val countryList = ArrayList<Country>()
     forEach {
-        if (it.name.lowercase().contains(countryName.lowercase()) ||
+        if (it.nameEn.lowercase().contains(countryName.lowercase()) ||
+            it.nameEs.lowercase().contains(countryName.lowercase()) ||
             it.dialCode.contains(countryName.lowercase())
         ) {
             countryList.add(it)
+        }
+    }
+    countryList.sortBy {
+        when (Locale.getDefault().language.lowercase()) {
+            "en" -> it.nameEn
+            "es" -> it.nameEs
+            else -> it.nameEn
         }
     }
     return countryList
 }
 
 data class Country(
-    @SerializedName("name")
+    @SerializedName("name_en")
     @Expose
-    val name: String = "",
+    val nameEn: String = "",
+    @SerializedName("name_es")
+    @Expose
+    val nameEs: String = "",
     @SerializedName("dial_code")
     @Expose
     val dialCode: String = "",
